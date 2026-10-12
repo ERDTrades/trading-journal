@@ -53,11 +53,11 @@ Add pnl Visualization in plotly [x]
 
 Add pnl Visualization in matplotlib [x]
 
-Add hovers to plotly for a trade descriptions etc []
+Add hovers to plotly for a trade descriptions etc [x]
 
 6. Add basic pnl statistics
 
-Total pnl [ ]
+Total pnl [x]
 
 Best winning trade [ ]
 

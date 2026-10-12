@@ -367,6 +367,15 @@ class Statistics(): #later do this class using NumPy
 
 
         return y
+
+    def best_winning_trade(self):
+        winners = [trade.pnl for trade in self.trades if trade.pnl > 0]
+        return max(winners, default=None)
+
+    def worst_losing_trade(self):
+        winners = [trade.pnl for trade in self.trades if trade.pnl < 0]
+        return min(winners, default=None)
+    
     def show_statistics(self):
         console.print(f"\n\n\nAmount of trades: {len(self.trades)}\n",
                       style="dark_blue"
@@ -440,9 +449,13 @@ class Statistics(): #later do this class using NumPy
             f"{self.max_losing_streak()}"
         )
 
-        return console.print(table)
+        table.add_row(
+            "Best winning day",
+            f"{self.best_winning_trade()}"
+        )
 
-        # TODO In the future -> Replace those prints above the table
-        # with a proper dataframe (second one for more detailed stats)
-        # or just make 1 bigger
-        # OR just leave it as it is, only changing colors with console prints
+        table.add_row(
+            "Worst losing trade",
+            f"{self.worst_losing_trade()}"
+        )
+        return console.print(table)

@@ -130,6 +130,8 @@ def pnl_amount_of_trades(journal):
         labels=labels
     )
 
+    fig.update_traces(mode="markers+lines")
+
     fig.update_layout(
         font_color="#4447FF",
         paper_bgcolor='black',
@@ -245,8 +247,6 @@ def describe_chart(journal):
             d["cumulative_pnl"].append(asia_current)
 
     df = pd.DataFrame(data=d)
-
-    print(df)
 
     fig = px.line(
         df,

@@ -29,5 +29,5 @@ The goal is to build a professional trading analytics platform while progressive
 
 
 ### Note from the author
-I started learning python on 15.05.2026 and this is actually my first project since since previous one was a small exercise built after completing API chapter of "Python Crash Course*.
+I started learning python on 15.05.2026 and this is actually my first project  since previous one was a small exercise built after completing API chapter of "Python Crash Course*.
 Im also not a native english speaker so hopefully everything in the project is clear. :)
