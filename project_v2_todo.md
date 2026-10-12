@@ -65,7 +65,11 @@ Worst losing trade [ ]
 
 PHASE 3 - DATAFRAME / PANDAS
 
-7. Add Trade → DataFrame conversion ONLY FOR ANALYSIS
+7. Add Trade → DataFrame conversion ONLY FOR ANALYSIS + Add new porject layer
+
+- As I finished python for data analysis book i want to implement something from it here
+  Although Im still a rookie, I want to recap this book by adding some data-analysis layers with jupyther notebook
+  Perhaps It will help me to progress even faster :> []
 
 JSON
   ↓
