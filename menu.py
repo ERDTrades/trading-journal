@@ -9,10 +9,15 @@ from plot_plotly import pnl_amount_of_trades, session_pnl, describe_chart
 
 journal = Journal()
 
+from numpy_analysis import numpy_statistics
+
+
 
 journal.load_from_json()
 
 stats = Statistics(journal.trades)
+
+numpy_stats = numpy_statistics(journal.trades)
 
 def show_menu():
     print(
@@ -27,7 +32,8 @@ def show_menu():
         "\n5. Delete Trade by ID"
         "\n6. Edit Trade"
         "\n7. Show Statistics"
-        "\n8. Show visualization menu"
+        "\n8. Show Numpy Statistics"
+        "\n9. Show visualization menu"
     )
           
 def menu_loop():
@@ -35,7 +41,7 @@ def menu_loop():
     while True:
         if input("Show menu (Y/N): ").strip().upper() == "Y":
             show_menu()
-        option = input("Choose an option (0-8): ").strip()
+        option = input("Choose an option (0-9): ").strip()
 
 
         if option == "1":
@@ -110,7 +116,21 @@ def menu_loop():
         elif option == "7":
              stats.show_statistics()
 
-        elif option ==  "8":
+        elif option == "8":
+
+             result = numpy_stats.calculate_pnl_statistics()
+
+             if result is None:
+                  print("\nNo trades available")
+             else: 
+                  print("\n-----Numpy Statistics-----")
+                  print(f"Total P&L:  {result['sum']:.2f}")
+                  print(f"P&L Mean:  {result['mean']:.2f}")
+                  print(f"P&L Standard Deviation:  {result['std']:.2f}")
+                  print(f"Max P&L:  {result['max']:.2f}")
+                  print(f"Min P&L:  {result['min']:.2f}")
+
+        elif option ==  "9":
             print("----------Visualization menu----------"
                     "\nCumulative winrate graph - input A "
                     "\nW/L/BE bar chart - input B "
