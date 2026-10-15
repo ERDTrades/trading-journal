@@ -118,17 +118,34 @@ def menu_loop():
 
         elif option == "8":
 
+               # 1ST func
              result = numpy_stats.calculate_pnl_statistics()
 
              if result is None:
                   print("\nNo trades available")
              else: 
-                  print("\n-----Numpy Statistics-----")
+                  print("\n-----Numpy Statistics 1 -----")
                   print(f"Total P&L:  {result['sum']:.2f}")
                   print(f"P&L Mean:  {result['mean']:.2f}")
-                  print(f"P&L Standard Deviation:  {result['std']:.2f}")
                   print(f"Max P&L:  {result['max']:.2f}")
                   print(f"Min P&L:  {result['min']:.2f}")
+
+               # 2ND func
+             result2 = numpy_stats.more_in_depth_statistics_pnl()
+
+             if result2 is None:
+                  print("\nNo trades available")
+
+             else:
+                  print("\n-----Numpy Statistic 2 -----")
+                  print(f"PnL Median:  {result2['median']}")
+                  print(f"P&L Standard Deviation:  {result2['std']:.2f}")
+
+                  print(f"PnL 10% Percentile:  {result2['percentiles'][0]:.2f}")
+                  print(f"PnL 25% Percentile:  {result2['percentiles'][1]:.2f}")
+                  print(f"PnL 50% Percentile:  {result2['percentiles'][2]:.2f}")
+                  print(f"PnL 75% Percentile:  {result2['percentiles'][3]:.2f}")
+                  print(f"PnL 90% Percentile:  {result2['percentiles'][-1]:.2f}")
 
         elif option ==  "9":
             print("----------Visualization menu----------"
