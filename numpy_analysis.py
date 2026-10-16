@@ -66,14 +66,21 @@ class numpy_statistics():
         #minimum equity value to this moment
         #Use np.minimum.accumulate()
 
-    def drawdown(self):
-        pass
-    #drawdown = equity - running_max
-    #max_drawdown = drawdown.min()
+        # or with drawdown
+        #drawdown = equity - running_max
+        #max_drawdown = drawdown.min()
 
     def histogram_pnl(self):
         pass
 
     #np.histogram(pnl_array, bins=10)
 
-    
+
+    def session_comparison_np(self):
+        pass
+    #table for:
+    #session, directions and pnl from self.trades
+    #for every session create mask that choses long/short transactions
+    # calculate wr, pnl, transaction amount for each
+    # calculate LONG-SHORT difference for winrate and pnl
+    # return results using dict so later i can use rich or visualization
