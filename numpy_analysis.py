@@ -45,35 +45,30 @@ class numpy_statistics():
 
         #with rich table later
     def equity_curve(self):
-        pass
+        transaction_list = []
+        for trade in self.trades:
+            transaction_list.append(trade.pnl)
 
-        # I need transaction list and extract trade.pnl from it with loop
-        # Calculate cumulative PnL across trades in chronological order
-        # using np.cumsum(). Return the cumulative PnL values for later
-        # visualization with Matplotlib or Plotly.
-        #with visualization
+        equity_crv = np.cumsum(transaction_list)
+
+        return equity_crv
 
     def running_maximum(self):
         """the highest equity level to date"""
-        pass
-        #Running max — Max equity value to this moment
-        #Use np.maximum.accumulate()
+        equity = self.equity_curve()
+        return np.maximum.accumulate(equity)
 
     def running_min(self):
         """Lowest equity level to date"""
-        pass
-
-        #minimum equity value to this moment
-        #Use np.minimum.accumulate()
-
-        # or with drawdown
-        #drawdown = equity - running_max
-        #max_drawdown = drawdown.min()
+        equity = self.equity_curve()
+        return np.minimum.accumulate(equity)
 
     def histogram_pnl(self):
-        pass
+        a_hist = self.equity_curve()
 
-    #np.histogram(pnl_array, bins=10)
+        a = np.histogram(a_hist, bins=10)
+
+        return a
 
 
     def session_comparison_np(self):
