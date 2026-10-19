@@ -63,12 +63,26 @@ class numpy_statistics():
         equity = self.equity_curve()
         return np.minimum.accumulate(equity)
 
+    def drawdown(self):
+        equity = self.equity_curve()
+        running_max = np.maximum.accumulate(equity)
+
+        return equity - running_max
+
     def histogram_pnl(self):
-        a_hist = self.equity_curve()
+        transaction_list = []
 
-        a = np.histogram(a_hist, bins=10)
+        for trade in self.trades:
+            transaction_list.append(trade.pnl)
 
-        return a
+        counts, bin_edges = np.histogram(
+            transaction_list, bins=10
+        )
+
+        return {
+            "counts": counts,
+            "bin_edges": bin_edges
+        }
 
 
     def session_comparison_np(self):

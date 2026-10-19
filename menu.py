@@ -147,6 +147,14 @@ def menu_loop():
                   print(f"PnL 75% Percentile:  {result2['percentiles'][3]:.2f}")
                   print(f"PnL 90% Percentile:  {result2['percentiles'][-1]:.2f}")
 
+
+             result3 = numpy_stats.histogram_pnl()
+
+             if result3 is None:
+                  print("\nNo trades available")
+             else:
+                  pass
+
         elif option ==  "9":
             print("----------Visualization menu----------"
                     "\nCumulative winrate graph - input A "
