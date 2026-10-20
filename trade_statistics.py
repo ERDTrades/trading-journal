@@ -425,11 +425,6 @@ class Statistics(): #later do this class using NumPy
         )
 
         table.add_row(
-            "Win Rate by Session",
-            f"{self.long_vs_short_wr()}"
-        )
-
-        table.add_row(
             "Long vs Short Win Ratio",
             f"{self.long_vs_short_wr()}"
         )

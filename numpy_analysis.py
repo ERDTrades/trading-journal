@@ -2,6 +2,13 @@ import numpy as np
 from journal import Journal
 
 
+from rich.text import Text
+from rich.table import Table
+from rich.console import Console
+from rich import box
+
+console = Console()
+
 journal = Journal()
 
 class numpy_statistics():
@@ -86,12 +93,34 @@ class numpy_statistics():
             "bin_edges": bin_edges
         }
 
+    def show_numpy_stats(self):
+        tables = []
 
-    def session_comparison_np(self):
-        pass
-    #table for:
-    #session, directions and pnl from self.trades
-    #for every session create mask that choses long/short transactions
-    # calculate wr, pnl, transaction amount for each
-    # calculate LONG-SHORT difference for winrate and pnl
-    # return results using dict so later i can use rich or visualization
+        result = self.calculate_pnl_statistics(self.trades)
+
+        table1 = Table(box=box.DOUBLE_EDGE, title="Statistics",
+                              title_style="bold blue",
+                              style="dark_blue"
+                              )
+        table1.add_column("Statistics", justify="center", style="dark_blue")
+        table1.add_column("Value", justify="center", style="dark_blue")
+
+        table1.add_column("Statistics", justify="center")
+        table1.add_column("Values", justify="right")
+
+
+        if result is not None:
+            table1.add_row(f"Total P&L {result['sum']:.2f}")
+            table1.add_row(f"Total P&L {result['mean']:.2f}")
+            table1.add_row(f"Total P&L {result['max']:.2f}")
+            table1.add_row(f"Total P&L {result['min']:.2f}")
+        else:
+            print("No trades available")
+
+        tables.append(table1)
+
+        # Add 2nd table
+        
+        # Add 3rd .. and so on
+
+        return tables

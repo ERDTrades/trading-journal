@@ -31,8 +31,8 @@ def show_menu():
         "\n4. Search trade by ID"
         "\n5. Delete Trade by ID"
         "\n6. Edit Trade"
-        "\n7. Show Statistics"
-        "\n8. Show Numpy Statistics"
+        "\n7. Show General Statistics"
+        "\n8. Show more in-depth Statistics" #Pandas & Numpy
         "\n9. Show visualization menu"
     )
           
@@ -117,14 +117,16 @@ def menu_loop():
              stats.show_statistics()
 
         elif option == "8":
+               #Pandas & Numpy
 
+               # Later make few tables in rich for those stats
                # 1ST func
              result = numpy_stats.calculate_pnl_statistics()
 
              if result is None:
                   print("\nNo trades available")
              else: 
-                  print("\n-----Numpy Statistics 1 -----")
+                  print("\n-----Statistics 1 -----")
                   print(f"Total P&L:  {result['sum']:.2f}")
                   print(f"P&L Mean:  {result['mean']:.2f}")
                   print(f"Max P&L:  {result['max']:.2f}")
@@ -137,7 +139,7 @@ def menu_loop():
                   print("\nNo trades available")
 
              else:
-                  print("\n-----Numpy Statistic 2 -----")
+                  print("\n-----Statistics 2 -----")
                   print(f"PnL Median:  {result2['median']}")
                   print(f"P&L Standard Deviation:  {result2['std']:.2f}")
 
@@ -156,7 +158,7 @@ def menu_loop():
              if histogram is None:
                   print("\nNo trades available")
              else:
-                  print("\n-----Numpy Statistic 3 -----")
+                  print("\n-----Statistics 3 -----")
                   print(f"Bins from {bin_edges[0]} to {bin_edges[1]}"
                         f"\tAmount: {counts[0]}")
                   print(f"Bins from {bin_edges[1]} to {bin_edges[2]}"
@@ -177,7 +179,7 @@ def menu_loop():
              elif running_min is None:
                   print("\nNo running minimum data available")
              else:
-               print("\n-----Numpy Statistic 4 -----")
+               print("\n-----Statistics 4 -----")
                print(f"\nHighest equity level to date: {running_max}")
                print(f"\nLowest equity level to date: {running_min}")
 
