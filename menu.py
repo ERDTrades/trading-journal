@@ -148,12 +148,38 @@ def menu_loop():
                   print(f"PnL 90% Percentile:  {result2['percentiles'][-1]:.2f}")
 
 
-             result3 = numpy_stats.histogram_pnl()
+             histogram = numpy_stats.histogram_pnl()
 
-             if result3 is None:
+             counts = histogram['counts']
+             bin_edges = histogram['bin_edges'] 
+
+             if histogram is None:
                   print("\nNo trades available")
              else:
-                  pass
+                  print("\n-----Numpy Statistic 3 -----")
+                  print(f"Bins from {bin_edges[0]} to {bin_edges[1]}"
+                        f"\tAmount: {counts[0]}")
+                  print(f"Bins from {bin_edges[1]} to {bin_edges[2]}"
+                        f"\tAmount: {counts[1]}")
+                  print(f"Bins from {bin_edges[2]} to {bin_edges[3]}"
+                        f"\tAmount: {counts[2]}")
+                  print(f"Bins from {bin_edges[3]} to {bin_edges[4]}"
+                        f"\tAmount: {counts[3]}")
+                  print(f"Bins from {bin_edges[4]} to {bin_edges[5]}"
+                        f"\tAmount: {counts[4]}")
+
+
+             running_max = numpy_stats.running_maximum()
+             running_min = numpy_stats.running_min()
+
+             if running_max is None:
+                  print("\nNo running maximum data available")
+             elif running_min is None:
+                  print("\nNo running minimum data available")
+             else:
+               print("\n-----Numpy Statistic 4 -----")
+               print(f"\nHighest equity level to date: {running_max}")
+               print(f"\nLowest equity level to date: {running_min}")
 
         elif option ==  "9":
             print("----------Visualization menu----------"

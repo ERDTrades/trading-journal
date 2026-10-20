@@ -56,12 +56,14 @@ class numpy_statistics():
     def running_maximum(self):
         """the highest equity level to date"""
         equity = self.equity_curve()
-        return np.maximum.accumulate(equity)
+        a =  np.maximum.accumulate(equity)
+        return a.max()
 
     def running_min(self):
         """Lowest equity level to date"""
         equity = self.equity_curve()
-        return np.minimum.accumulate(equity)
+        a = np.minimum.accumulate(equity)
+        return a.min()
 
     def drawdown(self):
         equity = self.equity_curve()
@@ -76,7 +78,7 @@ class numpy_statistics():
             transaction_list.append(trade.pnl)
 
         counts, bin_edges = np.histogram(
-            transaction_list, bins=10
+            transaction_list, bins=5
         )
 
         return {
