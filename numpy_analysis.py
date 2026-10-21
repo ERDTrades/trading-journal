@@ -50,7 +50,6 @@ class numpy_statistics():
             "percentiles": c
         }
 
-        #with rich table later
     def equity_curve(self):
         transaction_list = []
         for trade in self.trades:
@@ -105,10 +104,6 @@ class numpy_statistics():
         table1.add_column("Statistics", justify="center", style="dark_blue")
         table1.add_column("Value", justify="center", style="dark_blue")
 
-        table1.add_column("Statistics", justify="center")
-        table1.add_column("Values", justify="right")
-
-
         if result is not None:
             table1.add_row(f"Total P&L {result['sum']:.2f}")
             table1.add_row(f"Total P&L {result['mean']:.2f}")
@@ -119,8 +114,80 @@ class numpy_statistics():
 
         tables.append(table1)
 
-        # Add 2nd table
-        
-        # Add 3rd .. and so on
+
+
+        result2 = self.more_in_depth_statistics_pnl(self.trades)
+
+        table2 = Table(box=box.DOUBLE_EDGE, title="Statistics",
+                       title_style="bold blue",
+                       style="dark_blue"
+                       )
+
+        table2.add_column("Statistics", justify="center", style="dark_blue")
+        table2.add_column("Values", justify="center", style="dark_blue")
+
+        if result2 is not None:
+            table2.add_row(f"PnL Median: {result2['median']}")
+            table2.add_row(f"PnL Standard Deviation: {result2['std']:.2f}")
+            table2.add_row(f"PnL 10% Percentile:  {result2['percentiles'][0]:.2f}")
+            table2.add_row(f"PnL 25% Percentile:  {result2['percentiles'][1]:.2f}")
+            table2.add_row(f"PnL 50% Percentile:  {result2['percentiles'][2]:.2f}")
+            table2.add_row(f"PnL 75% Percentile:  {result2['percentiles'][3]:.2f}")
+            table2.add_row(f"PnL 90% Percentile:  {result2['percentiles'][-1]:.2f}")
+        else:
+            print("No trades available")
+
+        tables.append(table2)
+
+
+
+        result3 = self.histogram_pnl()
+
+        table3 = Table(box=box.DOUBLE_EDGE, title="Statistics",
+                        title_style="bold blue",
+                        style="dark_blue"
+                        )
+        table3.add_column("Statistics", justify="center", style="dark_blue")
+        table3.add_column("Value", justify="center", style="dark_blue")
+
+        counts = result3['counts']
+        bin_edges = result3['bin_edges']
+
+        if result3 is not None:
+            table3.add_row(f"Bins from {bin_edges[0]} to"
+                              f" {bin_edges[1]}\tAmount: {counts[0]}")
+            
+            table3.add_row(f"Bins from {bin_edges[1]} to"
+                              f" {bin_edges[2]}\tAmount: {counts[1]}")
+            
+            table3.add_row(f"Bins from {bin_edges[2]} to"
+                              f" {bin_edges[3]}\tAmount: {counts[2]}")
+            
+            table3.add_row(f"Bins from {bin_edges[3]} to"
+                              f" {bin_edges[4]}\tAmount: {counts[3]}")
+            
+            table3.add_row(f"Bins from {bin_edges[4]} to"
+                              f" {bin_edges[5]}\tAmount: {counts[4]}")
+
+            tables.append(table3)
+        else:
+            print("No trades available")
+
+
+            result4_p1 = self.running_maximum()
+            result4_p2 = self.running_min()
+
+            table4 = Table(box=box.DOUBLE_EDGE, title="Statistics",
+                           title_style="bold blue",
+                           style="dark_blue"
+                           )
+            table4.add_column("Statistics", justify="center", style="dark_blue")
+            table4.add_column("Value", justify="center", style="dark_blue")
+
+            if result4_p1 is not None and result4_p2 is not None:
+                table4.add_row(f"Highest equity level to date: {result4_p1}")
+                table4.add_row(f"Lowest equity level to date: {result4_p2}")
+
+            tables.append(table4)
 
         return tables
