@@ -95,14 +95,13 @@ class numpy_statistics():
     def show_numpy_stats(self):
         tables = []
 
-        result = self.calculate_pnl_statistics(self.trades)
+        result = self.calculate_pnl_statistics()
 
         table1 = Table(box=box.DOUBLE_EDGE, title="Statistics",
                               title_style="bold blue",
                               style="dark_blue"
                               )
         table1.add_column("Statistics", justify="center", style="dark_blue")
-        table1.add_column("Value", justify="center", style="dark_blue")
 
         if result is not None:
             table1.add_row(f"Total P&L {result['sum']:.2f}")
@@ -116,7 +115,7 @@ class numpy_statistics():
 
 
 
-        result2 = self.more_in_depth_statistics_pnl(self.trades)
+        result2 = self.more_in_depth_statistics_pnl()
 
         table2 = Table(box=box.DOUBLE_EDGE, title="Statistics",
                        title_style="bold blue",
@@ -124,7 +123,6 @@ class numpy_statistics():
                        )
 
         table2.add_column("Statistics", justify="center", style="dark_blue")
-        table2.add_column("Values", justify="center", style="dark_blue")
 
         if result2 is not None:
             table2.add_row(f"PnL Median: {result2['median']}")
@@ -148,7 +146,6 @@ class numpy_statistics():
                         style="dark_blue"
                         )
         table3.add_column("Statistics", justify="center", style="dark_blue")
-        table3.add_column("Value", justify="center", style="dark_blue")
 
         counts = result3['counts']
         bin_edges = result3['bin_edges']
@@ -174,20 +171,19 @@ class numpy_statistics():
             print("No trades available")
 
 
-            result4_p1 = self.running_maximum()
-            result4_p2 = self.running_min()
+        result4_p1 = self.running_maximum()
+        result4_p2 = self.running_min()
 
-            table4 = Table(box=box.DOUBLE_EDGE, title="Statistics",
-                           title_style="bold blue",
-                           style="dark_blue"
-                           )
-            table4.add_column("Statistics", justify="center", style="dark_blue")
-            table4.add_column("Value", justify="center", style="dark_blue")
+        table4 = Table(box=box.DOUBLE_EDGE, title="Statistics",
+                        title_style="bold blue",
+                        style="dark_blue"
+                        )
+        table4.add_column("Statistics", justify="center", style="dark_blue")
 
-            if result4_p1 is not None and result4_p2 is not None:
-                table4.add_row(f"Highest equity level to date: {result4_p1}")
-                table4.add_row(f"Lowest equity level to date: {result4_p2}")
+        if result4_p1 is not None and result4_p2 is not None:
+            table4.add_row(f"Highest equity level to date: {result4_p1}")
+            table4.add_row(f"Lowest equity level to date: {result4_p2}")
 
-            tables.append(table4)
+        tables.append(table4)
 
         return tables
