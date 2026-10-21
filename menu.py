@@ -117,71 +117,18 @@ def menu_loop():
              stats.show_statistics()
 
         elif option == "8":
-               #Pandas & Numpy
+               from numpy_analysis import numpy_statistics
 
-               # Later make few tables in rich for those stats
-               # 1ST func
-             result = numpy_stats.calculate_pnl_statistics()
+               numpyy_stats = numpy_statistics(journal.trades)
 
-             if result is None:
-                  print("\nNo trades available")
-             else: 
-                  print("\n-----Statistics 1 -----")
-                  print(f"Total P&L:  {result['sum']:.2f}")
-                  print(f"P&L Mean:  {result['mean']:.2f}")
-                  print(f"Max P&L:  {result['max']:.2f}")
-                  print(f"Min P&L:  {result['min']:.2f}")
+               from rich.console import Console
 
-               # 2ND func
-             result2 = numpy_stats.more_in_depth_statistics_pnl()
+               console = Console()
 
-             if result2 is None:
-                  print("\nNo trades available")
+               tables = numpyy_stats.show_numpy_stats()
 
-             else:
-                  print("\n-----Statistics 2 -----")
-                  print(f"PnL Median:  {result2['median']}")
-                  print(f"P&L Standard Deviation:  {result2['std']:.2f}")
-
-                  print(f"PnL 10% Percentile:  {result2['percentiles'][0]:.2f}")
-                  print(f"PnL 25% Percentile:  {result2['percentiles'][1]:.2f}")
-                  print(f"PnL 50% Percentile:  {result2['percentiles'][2]:.2f}")
-                  print(f"PnL 75% Percentile:  {result2['percentiles'][3]:.2f}")
-                  print(f"PnL 90% Percentile:  {result2['percentiles'][-1]:.2f}")
-
-
-             histogram = numpy_stats.histogram_pnl()
-
-             counts = histogram['counts']
-             bin_edges = histogram['bin_edges'] 
-
-             if histogram is None:
-                  print("\nNo trades available")
-             else:
-                  print("\n-----Statistics 3 -----")
-                  print(f"Bins from {bin_edges[0]} to {bin_edges[1]}"
-                        f"\tAmount: {counts[0]}")
-                  print(f"Bins from {bin_edges[1]} to {bin_edges[2]}"
-                        f"\tAmount: {counts[1]}")
-                  print(f"Bins from {bin_edges[2]} to {bin_edges[3]}"
-                        f"\tAmount: {counts[2]}")
-                  print(f"Bins from {bin_edges[3]} to {bin_edges[4]}"
-                        f"\tAmount: {counts[3]}")
-                  print(f"Bins from {bin_edges[4]} to {bin_edges[5]}"
-                        f"\tAmount: {counts[4]}")
-
-
-             running_max = numpy_stats.running_maximum()
-             running_min = numpy_stats.running_min()
-
-             if running_max is None:
-                  print("\nNo running maximum data available")
-             elif running_min is None:
-                  print("\nNo running minimum data available")
-             else:
-               print("\n-----Statistics 4 -----")
-               print(f"\nHighest equity level to date: {running_max}")
-               print(f"\nLowest equity level to date: {running_min}")
+               for table in tables:
+                    console.print(table)
 
         elif option ==  "9":
             print("----------Visualization menu----------"
