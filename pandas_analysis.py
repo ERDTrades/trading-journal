@@ -6,10 +6,54 @@ class pandas_statistics():
 
     def session_comparison_np(self):
         pass
-    #list at the beggining - table for rich:
-    #session, directions and pnl from self.trades
-    #for every session create mask that choses long/short transactions
-    # calculate wr, pnl, transaction amount for each
-    # calculate LONG-SHORT difference for winrate and pnl
-    # return results using dict so later i can use rich or visualization
+        #Group by sessions Session column
+        #Divide by LONG/SHORT Direction Column
+        #Trades BY ID - OR JUST COUNT COLUMN 
+        #WINRATE -> %
+        # Expectancy ?
+        # do it in dataframe use groupbys pivots if neede 
+        # and just use rich (probably in different function)
+        #to make it visible
 
+    def rolling_expectancy(self, window=30):
+        pass
+        # Convert trades into a DataFrame
+
+        # Sort trades chronologically using date or trade ID
+
+        # Select realized trade results (R-multiples or PnL)
+
+        # Validate window size against the number of trades
+
+        # Calculate rolling expectancy using pandas .rolling() and .mean()
+
+        # Store rolling expectancy alongside trade dates or IDs in a DataFrame
+
+        # Return the DataFrame
+
+        # Visualize the rolling expectancy using Plotly separately
+
+        # Window = 30 -> basically 30 observations
+
+    def bootstrap_expectancy_comparison(self, n_iterations=10000):
+
+        # Convert trades into a DataFrame
+
+        # Separate LONG and SHORT trades using pandas filtering
+
+        # Calculate observed expectancy for each direction using .mean()
+
+        # Calculate the observed LONG - SHORT expectancy difference
+
+        # Generate bootstrap samples with replacement
+        # Use pandas .sample() for resampling
+
+        # Calculate expectancy for LONG and SHORT in each iteration
+
+        # Store bootstrap differences in a DataFrame
+
+        # Calculate confidence interval using pandas .quantile()
+
+        # Return observed difference and confidence interval
+
+        # Visualize bootstrap differences using Seaborn separately
