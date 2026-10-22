@@ -36,7 +36,7 @@ class pandas_statistics():
         # Window = 30 -> basically 30 observations
 
     def bootstrap_expectancy_comparison(self, n_iterations=10000):
-
+        pass
         # Convert trades into a DataFrame
 
         # Separate LONG and SHORT trades using pandas filtering
@@ -57,3 +57,16 @@ class pandas_statistics():
         # Return observed difference and confidence interval
 
         # Visualize bootstrap differences using Seaborn separately
+        
+    def pandas_rich_table(self):
+        pass
+        #make necessary rich tables from those functions above
+
+
+# In Addition!!!
+
+# U already have advanced statistics option in menu
+# maybe instead of adding another thing to choose
+# expand this option by adding pandas
+# and make user decide what he wants to see
+# also a option withing that 8th one to visualize everything
