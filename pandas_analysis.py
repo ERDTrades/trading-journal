@@ -1,20 +1,35 @@
+import pandas as pd
 
+from journal import Journal
+
+
+from rich.text import Text
+from rich.table import Table
+from rich.console import Console
+from rich import box
+
+console = Console()
+
+journal = Journal()
 
 class pandas_statistics():
     def __init__(self, trades):
         self.trades = trades
 
-    def session_comparison_np(self):
-        pass
-        #Group by sessions Session column
-        #Divide by LONG/SHORT Direction Column
-        #Trades BY ID - OR JUST COUNT COLUMN 
-        #WINRATE -> %
-        # Expectancy ?
-        # do it in dataframe use groupbys pivots if neede 
-        # and just use rich (probably in different function)
-        #to make it visible
+    def session_comparison_pd(self):
+        df = pd.DataFrame(self.trades)
 
+
+        result = (df.groupby(['session', 'direction'])
+                  .agg(['pnl', 'count'],
+                       ['pnl', 'sum'],
+                       ['pnl', 'median'],
+                       ['pnl', lambda x: sum(x > 0) / len(x) * 100],
+                       ['rr', 'sum','mean']
+                       ).reset_index()
+                       )
+
+        return result
     def rolling_expectancy(self, window=30):
         pass
         # Convert trades into a DataFrame
